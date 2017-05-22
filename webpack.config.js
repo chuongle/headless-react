@@ -1,9 +1,13 @@
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
 	entry: './src/index.jsx',
 	output: {
-		path: './src',
-		filename: 'bundle.js'
+		path: './public',
+		filename: 'bundle.js',
+		sourceMapFilename: "bundle.map"
 	},
+	devtool: '#source-map',
 	devServer: {
 		inline: true,
 		contentBase: './src',
@@ -20,5 +24,10 @@ module.exports = {
 				loader: 'babel'
 			}
 		]
-	}
+	},
+	plugins: [
+    new Dotenv({
+      path: './.env'
+    })
+  ]
 }
