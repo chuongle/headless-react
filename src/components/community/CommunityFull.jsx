@@ -5,9 +5,9 @@ import { gql, graphql } from 'react-apollo';
 class CommunityFull extends Component {
   // constructor() {
   //   super();
-  //   this.state = { 
+  //   this.state = {
   //     title: '',
-  //     body: '' 
+  //     body: ''
   //   };
   // }
 
@@ -36,33 +36,34 @@ class CommunityFull extends Component {
   // }
 
   render() {
-  	return (
-  		<div className="community">
-  			<h1>{this.props.title}</h1>
-        <div
-          className="description"
-          dangerouslySetInnerHTML={{__html: this.props.body}}/>
-  		</div>
-  	)
+    console.log('hit here')
+    return (
+      <div className="community">
+      <h1>{this.props.title}</h1>
+      <div
+      className="description"
+      dangerouslySetInnerHTML={{__html: this.props.body}}/>
+      </div>
+    )
   }
 }
 
 
 CommunityFull.propTypes = {
-	nid: PropTypes.number,
-	title: PropTypes.string,
-	body: PropTypes.string
+  nid: PropTypes.number,
+  title: PropTypes.string,
+  body: PropTypes.string
 }
 
 const query = gql`{
-  nodeQuery(nid: $nid) {
-    entities {
-      ...on NodeArticle {
-        title
-        body
-      }
-    }
-  }
+nodeQuery(nid: $nid) {
+entities {
+...on NodeArticle {
+title
+body
+}
+}
+}
 }`;
 
 export default graphql(query, {

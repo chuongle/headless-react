@@ -10,7 +10,8 @@ class Routes extends Component {
       <Router history={browserHistory}>
         <div>
           <Route exact path="/" component={MainLayout} />
-          
+          <Route exact path="/communities" component={Communities} />
+          <Route path="/entity/:nid" component={CommunityFull} />
         </div>
       </Router>
     );

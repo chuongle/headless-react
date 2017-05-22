@@ -8,14 +8,11 @@ import { ApolloProvider } from 'react-apollo';
 class App extends Component {
 
   render() {
-  	return (
+    return (
       <ApolloProvider client={client}>
-        <div>
-          <Routes />
-          {this.props.children}
-        </div>
+        <Routes />
       </ApolloProvider>
-  	)
+    )
   }
 }
 

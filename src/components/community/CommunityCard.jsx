@@ -11,9 +11,7 @@ class CommunityCard extends Component {
         <div
           className="description"
           dangerouslySetInnerHTML={{__html: this.props.body}}/>
-        <Router>
           <Link to={`/entity/${ this.props.nid }`}>{this.props.title}</Link>
-        </Router>
       </div>
     )
   }

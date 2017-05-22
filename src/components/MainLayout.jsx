@@ -8,16 +8,11 @@ class MainLayout extends Component {
   render() {
     return (
       <div className="container">
-        <Router>
-          <div>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/communities">Communities</Link></li>
-          </ul>
-          <Route exact path="/communities" component={Communities} />
-          <Route path="/entity/:nid" component={CommunityFull} />
-          </div>
-        </Router>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/communities">Communities</Link></li>
+        </ul>
+
         <main>
           {this.props.children}
         </main>
