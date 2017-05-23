@@ -3,46 +3,20 @@ import PropTypes from 'prop-types';
 import { gql, graphql } from 'react-apollo';
 
 class CommunityFull extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     title: '',
-  //     body: ''
-  //   };
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if(nextProps !== undefined)
-  //     return
-
-  //   const CommunitiesData = graphql(gql`{
-  //     nodeQuery {
-  //       entities {
-  //         ... on NodeArticle {
-  //           entityId
-  //           title
-  //           fieldImage
-  //           body
-  //           entityUrl {
-  //             routed
-  //             path
-  //             alias
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }`)(Communities)
-
-  // }
-
   render() {
-    console.log('hit here')
+    if (this.props.data.loading) {
+      return (<div>Loading</div>)
+    }
+
+    if (this.props.data.error) {
+      return (<div>An unexpected error occurred</div>)
+    }
     return (
       <div className="community">
-      <h1>{this.props.title}</h1>
+      <h1>{this.props.data.onlyNodeWithId.entities[0].title}</h1>
       <div
       className="description"
-      dangerouslySetInnerHTML={{__html: this.props.body}}/>
+      dangerouslySetInnerHTML={{__html: this.props.data.onlyNodeWithId.entities[0].body}}/>
       </div>
     )
   }
@@ -55,17 +29,17 @@ CommunityFull.propTypes = {
   body: PropTypes.string
 }
 
-const query = gql`{
-nodeQuery(nid: $nid) {
-entities {
-...on NodeArticle {
-title
-body
-}
-}
-}
+const query = gql`query($id: Int) {
+  onlyNodeWithId:nodeQuery(nid: $id) {
+    entities {
+      ...on NodeArticle {
+        title
+        body
+      }
+    }
+  }
 }`;
 
 export default graphql(query, {
-  options: ({match}) => ({ variables: { nid: match.params.nid } })
+  options: ({match}) => ({ variables: { id: match.params.nid } })
 })( CommunityFull );

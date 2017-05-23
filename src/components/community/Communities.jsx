@@ -39,7 +39,6 @@ export default graphql(gql`{
       ... on NodeArticle {
         entityId
         title
-        fieldImage
         body
         entityUrl {
           routed
