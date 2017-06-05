@@ -1,0 +1,103 @@
+// Schema
+query {
+  __schema {
+    types {
+      name
+      kind
+      fields {
+        name
+      }
+      interfaces {
+        kind
+        name
+      }
+    }
+  }
+}
+
+// nodeQuery
+{
+  nodeQuery(offset: 0, limit: 5) {
+    entities {
+      ...on NodeCommunity {
+        entityId
+        title
+        body
+        fieldImage
+        fieldPets {
+          entityLabel
+          entityId
+          entityBundle
+        }
+        entityUrl {
+          path
+          routed
+          alias
+        }
+      }
+      ... on NodePage {
+        title
+        entityId
+        body
+      }
+    }
+  }
+}
+
+query ($path: String!) {
+  route:route(path: $path) {
+    entity {
+      ... on NodeCommunity {
+        entityId
+        title
+        body
+        fieldImage
+        fieldOneSiteId
+        fieldPhone
+        fieldAddress
+        fieldPlans
+        fieldPets {
+          entityLabel
+          entityId
+        }
+      }
+    }
+  }
+}
+
+
+// nodeById
+query($id: String) {
+  nodeById(id: $id, language: en) {
+    ...on NodeCommunity {
+      title
+      body
+      fieldImage
+      fieldAddress
+      fieldPets
+    }
+  }
+}
+
+// Menu
+{
+  menuLinkContentQuery {
+    entities {
+      entityLabel
+      entityId
+      entityBundle
+    }
+  }
+}
+
+// view filter by certain value
+{
+  default: communityGraphql1View(filter: {title: "", tid_raw: "1,2"}) {
+    entityType
+    entityLabel
+    entityId
+    entityBundle
+    entityUuid
+  }
+}
+
