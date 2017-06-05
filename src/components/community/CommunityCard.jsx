@@ -7,11 +7,10 @@ class CommunityCard extends Component {
   render() {
     return (
       <div className="community-card">
-        <h2>{this.props.title}</h2>
-        <div
-          className="description"
-          dangerouslySetInnerHTML={{__html: this.props.body}}/>
-          <Link to={`/entity/${ this.props.nid }`}>{this.props.title}</Link>
+        <h2>{ this.props.title }</h2>
+        <div dangerouslySetInnerHTML={{__html: this.props.address }}/>
+        <div>{ this.props.phone }</div>
+        <Link to={ this.props.url }>Read More</Link>
       </div>
     )
   }
@@ -21,6 +20,7 @@ export default CommunityCard;
 
 CommunityCard.propTypes = {
   nid: PropTypes.number,
-  title: PropTypes.string,
-  body: PropTypes.string
+  address: PropTypes.string,
+  url: PropTypes.string,
+  phone: PropTypes.string
 }

@@ -7,11 +7,13 @@ class Communities extends Component {
 	renderCommunities() {
     return this.props.data.nodeQuery.entities.map((entity) => (
       <CommunityCard
-      key={entity.entityId}
+      key={entity.fieldOneSiteId}
       title={entity.title}
       nid={entity.entityId}
-      body={entity.body}
-      url={entity.entityUrl.alias} />
+      address={entity.fieldAddress}
+      phone={entity.fieldPhone}
+      image={entity.fieldImage}
+      url={entity.entityUrl.path} />
     ));
   }
 
@@ -33,15 +35,16 @@ class Communities extends Component {
 }
 
 // export default Communities;
-export default graphql(gql`{
-  nodeQuery {
+export default graphql(gql`query {
+  nodeQuery(filter: {type: "community"}) {
     entities {
-      ... on NodeArticle {
+      ...on NodeCommunity {
         entityId
         title
-        body
+        fieldOneSiteId
+        fieldPhone
+        fieldAddress
         entityUrl {
-          routed
           path
           alias
         }
